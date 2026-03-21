@@ -1,0 +1,3 @@
+[console_scripts]
+shopping-agent = shopping_agent.main:main
+shopping-agent-server = shopping_agent.mock_server:run
