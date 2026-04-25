@@ -94,6 +94,10 @@ src/shopping_agent/
 
 [Universal Commerce Protocol (UCP)](https://ucp.dev/) is an open standard by Google for agentic commerce. It enables AI agents to discover products, manage carts, and complete purchases across merchants through a unified protocol.
 
+For a deeper walkthrough — full architecture diagram, the exact tool-call
+order from "find me headphones" to "shipped", and a candid list of UCP's
+limitations — see [`docs/UCP_SHOPPING_GUIDE.md`](docs/UCP_SHOPPING_GUIDE.md).
+
 ## License
 
 MIT
