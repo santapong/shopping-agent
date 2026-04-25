@@ -57,6 +57,25 @@ You: Ship to John Doe, 123 Main St, San Francisco, CA 94102
 You: Confirm the order
 ```
 
+## Web Frontend (one-command demo)
+
+Prefer a browser? Run the all-in-one demo server, which serves the UCP mock,
+the agent, and a static frontend on a single port:
+
+```bash
+python -m shopping_agent.web_server
+# then open http://localhost:8000
+```
+
+The page has:
+
+- A **Run Demo · Check It Works** button (health-checks `/api/health`, loads the catalog).
+- A **Products** grid with search and category filters.
+- A **Goods to Order** cart with live totals and a shipping-address checkout modal.
+- A **Chat with the Agent** panel that calls Claude via `/api/chat` (needs `ANTHROPIC_API_KEY`).
+
+Products and Cart work without an Anthropic API key — only the chat panel requires one.
+
 ## UCP Endpoints (Mock Server)
 
 | Method | Endpoint | Description |
@@ -87,12 +106,18 @@ src/shopping_agent/
 ├── models.py        # Data models (Product, Cart, Order)
 ├── ucp_client.py    # UCP REST API client
 ├── tools.py         # Shopping tools for Claude tool-use
-└── mock_server.py   # Mock UCP server with sample data
+├── mock_server.py   # Mock UCP server with sample data
+├── web_server.py    # All-in-one demo: UCP + agent + static frontend
+└── web/             # index.html, styles.css, app.js
 ```
 
 ## What is UCP?
 
 [Universal Commerce Protocol (UCP)](https://ucp.dev/) is an open standard by Google for agentic commerce. It enables AI agents to discover products, manage carts, and complete purchases across merchants through a unified protocol.
+
+For a deeper walkthrough — full architecture diagram, the exact tool-call
+order from "find me headphones" to "shipped", and a candid list of UCP's
+limitations — see [`docs/UCP_SHOPPING_GUIDE.md`](docs/UCP_SHOPPING_GUIDE.md).
 
 ## License
 

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UCP Shopping Agent — Demo</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">🛒</span>
+      <div>
+        <h1>UCP Shopping Agent</h1>
+        <p class="subtitle">Google Universal Commerce Protocol &middot; Claude AI</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <button id="run-demo-btn" class="primary">Run Demo &middot; Check It Works</button>
+      <span id="health-status" class="status-pill">not checked</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- Products -->
+    <section class="card products">
+      <header class="card-header">
+        <h2>Products</h2>
+        <div class="filters">
+          <input id="search-input" type="text" placeholder="Search products…" />
+          <select id="category-select">
+            <option value="">All categories</option>
+            <option value="electronics">Electronics</option>
+            <option value="clothing">Clothing</option>
+            <option value="home">Home</option>
+          </select>
+          <button id="search-btn">Search</button>
+        </div>
+      </header>
+      <div id="products-grid" class="products-grid">
+        <p class="empty">Click <strong>Run Demo</strong> or <strong>Search</strong> to load products.</p>
+      </div>
+    </section>
+
+    <!-- Cart -->
+    <section class="card cart">
+      <header class="card-header">
+        <h2>Goods to Order</h2>
+        <button id="refresh-cart-btn" class="ghost">Refresh</button>
+      </header>
+      <div id="cart-items" class="cart-items">
+        <p class="empty">Your cart is empty.</p>
+      </div>
+      <div id="cart-totals" class="cart-totals hidden">
+        <div><span>Subtotal</span><span id="cart-subtotal">$0.00</span></div>
+        <div><span>Tax</span><span id="cart-tax">$0.00</span></div>
+        <div><span>Shipping</span><span id="cart-shipping">$0.00</span></div>
+        <div class="total"><span>Total</span><span id="cart-total">$0.00</span></div>
+      </div>
+      <button id="checkout-btn" class="primary full" disabled>Checkout</button>
+    </section>
+
+    <!-- Chat -->
+    <section class="card chat">
+      <header class="card-header">
+        <h2>Chat with the Agent</h2>
+        <button id="reset-chat-btn" class="ghost">Reset</button>
+      </header>
+      <div id="chat-messages" class="chat-messages">
+        <div class="msg agent">
+          Hi! I'm your shopping agent. Try: <em>"Find me wireless headphones under $300"</em>.
+        </div>
+      </div>
+      <form id="chat-form" class="chat-form">
+        <input id="chat-input" type="text" placeholder="Tell me what you want to buy…" autocomplete="off" />
+        <button type="submit" class="primary">Send</button>
+      </form>
+      <p class="hint">Requires <code>ANTHROPIC_API_KEY</code> in your <code>.env</code>. The Products and Cart sections work without it.</p>
+    </section>
+  </main>
+
+  <!-- Checkout modal -->
+  <div id="checkout-modal" class="modal hidden">
+    <div class="modal-content">
+      <header>
+        <h3>Shipping Address</h3>
+        <button id="close-modal-btn" class="ghost">✕</button>
+      </header>
+      <form id="checkout-form">
+        <label>Name <input name="name" required /></label>
+        <label>Street <input name="street" required /></label>
+        <div class="row">
+          <label>City <input name="city" required /></label>
+          <label>State <input name="state" required maxlength="3" /></label>
+        </div>
+        <div class="row">
+          <label>ZIP <input name="zip_code" required /></label>
+          <label>Country <input name="country" value="US" required /></label>
+        </div>
+        <button type="submit" class="primary full">Place Order</button>
+      </form>
+      <div id="checkout-result" class="checkout-result hidden"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -23,6 +23,7 @@ dev = [
 [project.scripts]
 shopping-agent = "shopping_agent.main:main"
 shopping-agent-server = "shopping_agent.mock_server:run"
+shopping-agent-web = "shopping_agent.web_server:run"
 
 [build-system]
 requires = ["setuptools>=75.0"]
@@ -30,6 +31,9 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+shopping_agent = ["web/*.html", "web/*.css", "web/*.js"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
